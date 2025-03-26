@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateLessonInput } from './inputs/create-lesson.input';
 import { v4 as uuid } from 'uuid';
 import errorConstants from '../constants/error.constants';
+import { AssignStudentsToLessonInput } from './inputs/assign-students-to-lesson.input';
 
 @Injectable()
 export class LessonService {
@@ -19,21 +20,32 @@ export class LessonService {
       throw new NotFoundException(errorConstants.LESSON_NOT_FOUND);
     }
 
+    if (!lesson.students) lesson.students = [];
+
     return lesson;
   }
 
   async getAllLessons(): Promise<Lesson[]> {
-    return this.lessonRepository.find();
+    const lessons = await this.lessonRepository.find();
+
+    const allLessons = lessons.map((lesson) => {
+      if (!lesson.students) lesson.students = [];
+
+      return lesson;
+    });
+
+    return allLessons;
   }
 
   async createLesson(createLesson: CreateLessonInput): Promise<Lesson> {
-    const { name, startDate, endDate } = createLesson;
+    const { name, startDate, endDate, students } = createLesson;
 
     const lesson = this.lessonRepository.create({
       id: uuid(),
       name,
       startDate,
       endDate,
+      students: students,
     });
 
     return this.lessonRepository.save(lesson);
