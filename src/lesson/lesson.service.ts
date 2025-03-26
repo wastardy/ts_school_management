@@ -34,4 +34,8 @@ export class LessonService {
 
     return this.lessonRepository.save(lesson);
   }
+
+  async getAllLessons(): Promise<Lesson[]> {
+    return this.lessonRepository.find();
+  }
 }
