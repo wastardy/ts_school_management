@@ -22,6 +22,10 @@ export class StudentService {
     return student;
   }
 
+  async getAllStudents(): Promise<Student[]> {
+    return this.studentRepository.find();
+  }
+
   async createStudent(createStudent: CreateStudentInput): Promise<Student> {
     const { firstName, lastName, group } = createStudent;
 
