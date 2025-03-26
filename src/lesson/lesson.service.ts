@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson } from './lesson.entity';
 import { Repository } from 'typeorm';
-import { CreateLessonDto } from './dtos/create-lesson.dto';
+import { CreateLessonInput } from './inputs/create-lesson.input';
 import { v4 as uuid } from 'uuid';
 import errorConstants from '../constants/error.constants';
 
@@ -22,7 +22,7 @@ export class LessonService {
     return lesson;
   }
 
-  async createLesson(createLesson: CreateLessonDto): Promise<Lesson> {
+  async createLesson(createLesson: CreateLessonInput): Promise<Lesson> {
     const { name, startDate, endDate } = createLesson;
 
     const lesson = this.lessonRepository.create({
