@@ -1,98 +1,145 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS GraphQL Pet Project
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project is a practice implementation of **GraphQL** with **NestJS** and **TypeScript**. It provides an API for managing lessons and students, using **MongoDB** as a database running as a **Docker** container for additional practice
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **GraphQL API** for creating and querying lessons and students.
+- **NestJS framework** for structured and scalable backend development.
+- **TypeScript** for type safety and improved development experience.
+- **MongoDB** for practice no-relational database
+- **TypeORM integration** for interacting with MongoDB.
+- **Docker support** for easy database setup.
 
-## Project setup
+## Technologies Used
 
-```bash
-$ npm install
+- **TypeScript**
+- **NestJS**
+- **GraphQL (Apollo Server Express)**
+- **MongoDB** (via Docker)
+- **TypeORM**
+- **ESLint & Prettier** for code quality
+
+## Installation & Setup
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- **Node.js** (>=16)
+- **Docker** & **Docker Compose**
+
+### 1. Clone the repository
+
+```sh
+git clone https://github.com/your-repo-url.git
+cd ts_graphql
 ```
 
-## Compile and run the project
+### 2. Install dependencies
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```sh
+npm install
 ```
 
-## Run tests
+### 3. Start MongoDB with Docker
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```sh
+docker run -d --name mongodb-test \
+-e MONGO_INITDB_ROOT_USERNAME=mongoadmin \
+-e MONGO_INITDB_ROOT_PASSWORD=mongoadmin \
+-p 27017:27017 -v mongodb-test:/data/db \
+mongo:7.0
 ```
 
-## Deployment
+### 4. Run the development server
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
+```sh
+npm run start:dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+The server will start on `http://localhost:3000`.
 
-## Resources
+## GraphQL API Usage
 
-Check out a few resources that may come in handy when working with NestJS:
+> You can interact with the API using the GraphQL Playground at:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```
+http://localhost:3000/graphql
+```
 
-## Support
+### Example Queries & Mutations
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### Create a Lesson
 
-## Stay in touch
+```graphql
+mutation {
+  createLesson(
+    createLessonInput: {
+      name: "GraphQL Basics"
+      startDate: "2025-04-01T10:00:00Z"
+      endDate: "2025-04-01T11:30:00Z"
+      students: []
+    }
+  ) {
+    id
+    name
+  }
+}
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### Create(add) a Student
 
-## License
+```graphql
+mutation {
+  createStudent(
+    createStudentInput: {
+      firstName: "Andrew"
+      lastName: "Wastardy"
+      group: "CS 31/2"
+    }
+  ) {
+    id
+    firstName
+    lastName
+    group
+  }
+}
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+#### Get All Lessons
+
+```graphql
+query {
+  getAllLessons {
+    id
+    name
+    students {
+      firstName
+      lastName
+    }
+  }
+}
+```
+
+#### Assign Students to Lesson
+
+```graphql
+mutation {
+  assignStudentsToLesson(
+    assignStudentsToLessonInput: {
+      lessonId: "6fca0ec7-f7eb-47db-ab05-c99f798ae5f8"
+      studentIds: [
+        "dcabc16a-81c6-4437-8f83-f45addb93c4a"
+        "0e619d48-5881-49e0-9638-356dd0ae98d7"
+        "585c6b23-2f48-46c8-b2e9-5fcb5b3529b8"
+      ]
+    }
+  ) {
+    name
+    students
+  }
+}
+```
