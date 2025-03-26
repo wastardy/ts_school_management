@@ -50,4 +50,22 @@ export class LessonService {
 
     return this.lessonRepository.save(lesson);
   }
+
+  async assignStudentsToLesson(
+    assignStudentsToLessonInput: AssignStudentsToLessonInput,
+  ): Promise<Lesson> {
+    const { lessonId, studentIds } = assignStudentsToLessonInput;
+
+    const lesson = await this.lessonRepository.findOneBy({ id: lessonId });
+
+    if (!lesson) {
+      throw new NotFoundException(errorConstants.LESSON_NOT_FOUND);
+    }
+
+    if (!lesson.students) lesson.students = [];
+
+    lesson.students = [...lesson.students, ...studentIds];
+
+    return this.lessonRepository.save(lesson);
+  }
 }
