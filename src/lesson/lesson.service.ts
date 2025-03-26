@@ -22,6 +22,10 @@ export class LessonService {
     return lesson;
   }
 
+  async getAllLessons(): Promise<Lesson[]> {
+    return this.lessonRepository.find();
+  }
+
   async createLesson(createLesson: CreateLessonInput): Promise<Lesson> {
     const { name, startDate, endDate } = createLesson;
 
@@ -33,9 +37,5 @@ export class LessonService {
     });
 
     return this.lessonRepository.save(lesson);
-  }
-
-  async getAllLessons(): Promise<Lesson[]> {
-    return this.lessonRepository.find();
   }
 }
