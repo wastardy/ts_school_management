@@ -3,9 +3,6 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateLessonDto {
   @IsNotEmpty()
-  id: string;
-
-  @IsNotEmpty()
   name: string;
 
   @IsNotEmpty()
